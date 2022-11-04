@@ -66,6 +66,7 @@ function single_vm {
 		"vm-cd-list" "List CDs" \
 		"vm-shutdown" "Shut down VM" \
 		"vm-reset-powerstate" "Pull plug and restart VM" \
+		"vm-snapshot" "Create snapshop"
 	)
 
 	if [[ "$VM_STATUS" != "running" ]]; then
@@ -98,10 +99,17 @@ function single_vm {
 		exit 0
 	elif [[ "$OPTION" == "q" ]]; then
 		exit 0
+	elif [[ "$OPTION" == "vm-snapshot" ]]; then
+		SNAPSHOP_NAME=$(whiptail --inputbox "Name of this snapshot" 8 39 "Snapshot ($(date))" --title "Snapshot name" 3>&1 1>&2 2>&3)
+
+		exitstatus=$?
+		if [ $exitstatus = 0 ]; then
+			xe vm-snapshot vm="$VM_UUID" uuid new-name-label="$SNAPSHOP_NAME"
+		fi
 	elif [[ "$OPTION" == "vm-reset-powerstate" ]]; then
 		if (whiptail --title "Hard-reset VM?" --yesno "Are you sure? This may cause data loss." $LINES $COLUMNS); then
 			set +e
-			RES=$(xe $OPTION uuid=$1 --force 2>&1)
+			RES=$(xe $OPTION uuid=$VM_UUID --force 2>&1)
 			EC=$?
 			set -e
 
