@@ -174,11 +174,13 @@ function main {
 	if [[ "$CHOSEN_OPTION" == "q" ]]; then
 		exit 0
 	elif [[ "$CHOSEN_OPTION" == "cd-list" ]]; then
-		xe cd-list
+		run_command_whiptail "cd-list" "xe cd-list"
 	elif [[ "$CHOSEN_OPTION" == "network-list" ]]; then
-		xe network-list
+		run_command_whiptail "network-list" "xe network-list"
+		main
 	elif [[ "$CHOSEN_OPTION" == "sr-list" ]]; then
-		xe sr-list
+		run_command_whiptail "sr-list" "xe sr-list"
+		main
 	else
 		single_vm "$CHOSEN_OPTION"
 	fi
