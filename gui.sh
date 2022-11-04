@@ -142,10 +142,11 @@ function single_vm {
 		exit 0
 	elif [[ "$OPTION" == "vm-snapshot" ]]; then
 		SNAPSHOP_NAME=$(whiptail --inputbox "Name of this snapshot" 8 39 "Snapshot ($(date))" --title "Snapshot name" 3>&1 1>&2 2>&3)
+		SNAPSHOP_NAME=$(echo "$SNAPSHOP_NAME" | sed -e 's/"//')
 
 		exitstatus=$?
 		if [ $exitstatus = 0 ]; then
-			run_command_whiptail "Snapshot" "xe vm-snapshot vm=$VM_UUID new-name-label='$SNAPSHOP_NAME'"
+			run_command_whiptail "Snapshot" "xe vm-snapshot vm=$VM_UUID new-name-label=\"$SNAPSHOP_NAME\""
 		fi
 	elif [[ "$OPTION" == "vm-reset-powerstate" ]]; then
 		if (whiptail --title "Hard-reset VM?" --yesno "Are you sure? This may cause data loss." $LINES $COLUMNS); then
