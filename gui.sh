@@ -156,9 +156,7 @@ function single_vm {
 
 		exitstatus=$?
 		if [ $exitstatus = 0 ]; then
-			xe vm-cd-add cd-name="$CD_NAME" device=0 uuid=$VM_UUID
-		else
-			echo "User selected Cancel."
+			run_command_whiptail "vm-cd-add" "xe vm-cd-add cd-name="$CD_NAME" device=0 uuid=$VM_UUID"
 		fi
 	elif [[ "$OPTION" == "vm-reset-powerstate" ]]; then
 		if (whiptail --title "Hard-reset VM?" --yesno "Are you sure? This may cause data loss." $LINES $COLUMNS); then
