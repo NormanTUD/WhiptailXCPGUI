@@ -92,7 +92,7 @@ function single_vm {
 		"vm-shutdown" "Shut down VM" \
 		"vm-reboot" "Reboots the VM" \
 		"snapshot-list" "Lists all snapshots for this VM" \
-		"vbd-eject" "Eject currently mounted CD"
+		"vm-cd-eject" "Eject currently mounted CD"
 		"vm-cd-add" "Add CD"
 	)
 
