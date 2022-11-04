@@ -81,7 +81,7 @@ function single_vm {
 function main {
 	VMS=$(xe vm-list | perl -lne '$\ = ""; my $str = ""; while (<>) { $str .= $_; } my @splitted = split /\R\R+/, $str; my %vms = (); foreach my $vm (@splitted) { my ($uuid, $name, $status) = split /\R/, $vm; $uuid =~ s#^.*?:\s*##g; $name =~ s#^.*?:\s*##g; $status =~ s#^.*?:\s*##g; $vms{$uuid} = "$name ($status)"; chomp $vms{$uuid}; } foreach (keys(%vms)) { print qq#"$_" "$vms{$_}" #; }')
 
-	CHOSEN_OPTION=$(eval "whiptail --title 'Menu example' --menu 'Choose an option' $LINES $COLUMNS $(( $LINES - 8 )) 'cd-list' 'List CDs and ISOs' 'network-list' 'List networks' $VMS 'q' 'exit' 3>&1 1>&2 2>&3")
+	CHOSEN_OPTION=$(eval "whiptail --title 'Menu example' --menu 'Choose an option' $LINES $COLUMNS $(( $LINES - 8 )) 'cd-list' 'List CDs and ISOs' 'network-list' 'List networks' 'sr-list' 'List SRs' $VMS 'q' 'exit' 3>&1 1>&2 2>&3")
 
 	if [[ "$CHOSEN_OPTION" == "q" ]]; then
 		exit 0
