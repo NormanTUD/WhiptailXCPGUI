@@ -69,6 +69,7 @@ function single_vm {
 		"vm-shutdown" "Shut down VM" \
 		"vm-reboot" "Reboots the VM" \
 		"vm-suspend" "Suspend VM" \
+		"snapshot-list" "Lists all snapshots for this VM" \
 		"vm-resume" "Resume VM" \
 	)
 
