@@ -60,9 +60,16 @@ function single_vm {
 
 	echo $VM_UUID
 
+	POSSIBLE_PARAMS=(
+		'vm-vif-list' 'Lists the VIFs from the specified VMs' \
+		"vm-cd-list" "List CDs" \
+	)
+
+	
+
 	OPTION=$(whiptail --title "Menu example" --menu "$VM_NAME ($VM_STATUS)" $LINES $COLUMNS $(( $LINES - 8 )) \
 		"back" "Return to the main menu." \
-		"vm-cd-list" "List CDs" \
+		"${POSSIBLE_PARAMS[@]}" \
 		"vm-start" "Start VM" \
 		"vm-suspend" "Suspend VM" \
 		"diagnostic-vm-status" "Query the hosts on which the VM can boot, check the sharing/locking status of all VBDs." \
@@ -72,7 +79,6 @@ function single_vm {
 		"vm-unpause" "Unpause VM" \
 		"vm-resume" "Resume VM" \
 		"vm-shutdown" "Shut down VM" \
-		'vm-vif-list' 'Lists the VIFs from the specified VMs' \
 		'q' 'exit' \
 		3>&1 1>&2 2>&3
 	)
