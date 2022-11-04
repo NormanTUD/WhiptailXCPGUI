@@ -61,7 +61,10 @@ function single_vm {
 		"diagnostic-vm-status" "Query the hosts on which the VM can boot, check the sharing/locking status of all VBDs." \
 		"vm-reboot" "Reboots the VM" \
 		"vm-reset-powerstate" "Pull plug and restart VM" \
-		3>&1 1>&2 2>&3)
+		"vm-pause" "Pause VM" \
+		"vm-resume" "Resume paused VM" \
+		3>&1 1>&2 2>&3
+	)
 
 	echo $OPTION
 
