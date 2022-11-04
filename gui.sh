@@ -62,7 +62,8 @@ function single_vm {
 		"vm-reboot" "Reboots the VM" \
 		"vm-reset-powerstate" "Pull plug and restart VM" \
 		"vm-pause" "Pause VM" \
-		"vm-resume" "Resume paused VM" \
+		"vm-unpause" "Unpause VM" \
+		"vm-resume" "Resume VM" \
 		3>&1 1>&2 2>&3
 	)
 
