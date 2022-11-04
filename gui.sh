@@ -48,12 +48,19 @@ function get_status_for_vm {
 	xe vm-list | grep -A2 "$1" | tail -n1 | sed -e 's/.*: //'
 }
 
+function get_vm_name_by_uuid {
+	xe vm-list | grep -A1 "$1" | tail -n1  | sed -e 's/.*:\s*//'
+}
+
 function single_vm {
 	VM_UUID=$1
 
+	VM_STATUS=$(get_status_for_vm $VM_UUID)
+	VM_NAME=$(get_vm_name_by_uuid $VM_UUID)
+
 	echo $VM_UUID
 
-	OPTION=$(whiptail --title "Menu example" --menu "Choose an option" $LINES $COLUMNS $(( $LINES - 8 )) \
+	OPTION=$(whiptail --title "Menu example" --menu "$VM_NAME ($VM_STATUS)" $LINES $COLUMNS $(( $LINES - 8 )) \
 		"back" "Return to the main menu." \
 		"vm-cd-list" "List CDs" \
 		"vm-start" "Start VM" \
