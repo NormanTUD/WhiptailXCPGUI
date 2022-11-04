@@ -198,6 +198,7 @@ function main {
 		main
 	elif [[ "$CHOSEN_OPTION" == "host-list" ]]; then
 		run_command_whiptail "host-list" "xe host-list"
+		main
 	else
 		single_vm "$CHOSEN_OPTION"
 	fi
