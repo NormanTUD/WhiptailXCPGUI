@@ -87,13 +87,10 @@ function single_vm {
 		"diagnostic-vm-status" "Query the hosts on which the VM can boot, check the sharing/locking status of all VBDs." \
 		'vm-vif-list' 'Lists the VIFs from the specified VMs' \
 		"vm-cd-list" "List CDs" \
-		"vm-reset-powerstate" "Pull plug and restart VM" \
-		"vm-snapshot" "Create snapshop"
-		"vm-shutdown" "Shut down VM" \
-		"vm-reboot" "Reboots the VM" \
-		"snapshot-list" "Lists all snapshots for this VM" \
-		"vm-cd-eject" "Eject currently mounted CD"
 		"vm-cd-add" "Add CD"
+		"vm-cd-eject" "Eject currently mounted CD"
+		"vm-snapshot" "Create snapshop"
+		"snapshot-list" "Lists all snapshots for this VM" \
 	)
 
 	if [[ "$VM_STATUS" != "running" ]]; then
@@ -102,6 +99,12 @@ function single_vm {
 				"vm-start" "Start VM"
 			)
 		fi
+	else
+		POSSIBLE_PARAMS+=(
+			"vm-reboot" "Reboots the VM"
+			"vm-shutdown" "Shut down VM"
+			"vm-reset-powerstate" "Pull plug and restart VM"
+		)
 	fi
 
 	if [[ "$VM_STATUS" == "suspended" ]]; then
