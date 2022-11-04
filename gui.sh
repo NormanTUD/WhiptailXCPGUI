@@ -87,8 +87,10 @@ function single_vm {
 	elif [[ "$OPTION" == "q" ]]; then
 		exit 0
 	else
+		set +e
 		RES=$(xe $OPTION uuid=$1 2>&1)
 		EC=$?
+		set -e
 
 		whiptail --title "Example Dialog" --msgbox "$RES\n\nExit-Code: $EC" $LINES $COLUMNS
 	fi
