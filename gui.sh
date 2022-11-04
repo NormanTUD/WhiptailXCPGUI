@@ -16,6 +16,7 @@ function calltracer () {
         echo 'Last file/last line:'
         caller
 }
+
 trap 'calltracer' ERR
 
 function help () {
@@ -43,6 +44,27 @@ if ! command -v whiptail >/dev/null 2>/dev/null; then
 	red_text "whiptail is not installed. Run sudo apt-get install whiptail to install it"
 	exit 1
 fi
+
+function run_command_whiptail {
+	TITLE=$1
+	COMMAND=$2
+	set +e
+	RES=$($COMMAND 2>&1)
+	EC=$?
+	set -e
+
+
+	FULL_STR=""
+
+	if [[ "$EC" == "0" ]]; then
+		FULL_STR="$RES";
+	else
+		FULL_STR="$RES\n\nExit-Code: $EC";
+	fi
+
+
+	whiptail --title "$TITLE" --msgbox "$FULL_STR" $LINES $COLUMNS
+}
 
 function get_status_for_vm {
 	xe vm-list | grep -A2 "$1" | tail -n1 | sed -e 's/.*: //'
@@ -123,39 +145,11 @@ function single_vm {
 
 		exitstatus=$?
 		if [ $exitstatus = 0 ]; then
-			set +e
-			RES=$(xe vm-snapshot vm="$VM_UUID" new-name-label="$SNAPSHOP_NAME")
-			EC=$?
-			set -e
-
-			FULL_STR=""
-
-			if [[ "$EC" == "0" ]]; then
-				FULL_STR="$RES";
-			else
-				FULL_STR="$RES\n\nExit-Code: $EC";
-			fi
-
-
-			whiptail --title "Example Dialog" --msgbox "$FULL_STR" $LINES $COLUMNS
+			run_command_whiptail "Snapshot" "xe vm-snapshot vm='$VM_UUID' new-name-label='$SNAPSHOP_NAME'"
 		fi
 	elif [[ "$OPTION" == "vm-reset-powerstate" ]]; then
 		if (whiptail --title "Hard-reset VM?" --yesno "Are you sure? This may cause data loss." $LINES $COLUMNS); then
-			set +e
-			RES=$(xe $OPTION uuid=$VM_UUID --force 2>&1)
-			EC=$?
-			set -e
-
-			FULL_STR=""
-
-			if [[ "$EC" == "0" ]]; then
-				FULL_STR="$RES";
-			else
-				FULL_STR="$RES\n\nExit-Code: $EC";
-			fi
-
-
-			whiptail --title "Example Dialog" --msgbox "$FULL_STR" $LINES $COLUMNS
+			run_command_whiptail "$OPTION" "xe $OPTION uuid=$VM_UUID --force"
 		else
 			echo "User selected No, exit status was $?."
 		fi
