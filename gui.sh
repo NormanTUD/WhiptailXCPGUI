@@ -65,12 +65,14 @@ function single_vm {
 		"vm-cd-list" "List CDs" \
 	)
 
+	if [[ "$VM_STATUS" != "running" ]; then
+		POSSIBLE_PARAMS+=("vm-start" "Start VM")
+	fi
 	
 
 	OPTION=$(whiptail --title "Menu example" --menu "$VM_NAME ($VM_STATUS)" $LINES $COLUMNS $(( $LINES - 8 )) \
 		"back" "Return to the main menu." \
 		"${POSSIBLE_PARAMS[@]}" \
-		"vm-start" "Start VM" \
 		"vm-suspend" "Suspend VM" \
 		"diagnostic-vm-status" "Query the hosts on which the VM can boot, check the sharing/locking status of all VBDs." \
 		"vm-reboot" "Reboots the VM" \
