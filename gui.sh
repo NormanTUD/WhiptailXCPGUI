@@ -68,6 +68,12 @@ function single_vm {
 	if [[ "$VM_STATUS" != "running" ]]; then
 		POSSIBLE_PARAMS+=("vm-start" "Start VM")
 	fi
+
+	if [[ "$VM_STATUS" == "paused" ]]; then
+		POSSIBLE_PARAMS+=("vm-unpause" "Unpause VM")
+	else
+		POSSIBLE_PARAMS+=("vm-pause" "Pause VM")
+	fi
 	
 
 	OPTION=$(whiptail --title "Menu example" --menu "$VM_NAME ($VM_STATUS)" $LINES $COLUMNS $(( $LINES - 8 )) \
@@ -77,8 +83,6 @@ function single_vm {
 		"diagnostic-vm-status" "Query the hosts on which the VM can boot, check the sharing/locking status of all VBDs." \
 		"vm-reboot" "Reboots the VM" \
 		"vm-reset-powerstate" "Pull plug and restart VM" \
-		"vm-pause" "Pause VM" \
-		"vm-unpause" "Unpause VM" \
 		"vm-resume" "Resume VM" \
 		"vm-shutdown" "Shut down VM" \
 		'q' 'exit' \
