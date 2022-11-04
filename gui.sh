@@ -84,9 +84,11 @@ function single_vm {
 			"vm-resume" "Resume VM"
 		)
 	else
-		POSSIBLE_PARAMS+=(
-			"vm-suspend" "Suspend VM"
-		)
+		if [[ "$VM_STATUS" == "running" ]]; then
+			POSSIBLE_PARAMS+=(
+				"vm-suspend" "Suspend VM"
+			)
+		fi
 	fi
 
 	if [[ "$VM_STATUS" == "paused" ]]; then
