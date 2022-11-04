@@ -69,7 +69,7 @@ function single_vm {
 	echo $OPTION
 
 
-	if [[ "$CHOSEN_OPTION" == "back" ]]; then
+	if [[ "$OPTION" == "back" ]]; then
 		echo "Going back...";
 	else
 		xe $OPTION uuid=$1
