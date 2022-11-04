@@ -104,7 +104,7 @@ function single_vm {
 
 		exitstatus=$?
 		if [ $exitstatus = 0 ]; then
-			xe vm-snapshot vm="$VM_UUID" uuid new-name-label="$SNAPSHOP_NAME"
+			xe vm-snapshot vm="$VM_UUID" new-name-label="$SNAPSHOP_NAME"
 		fi
 	elif [[ "$OPTION" == "vm-reset-powerstate" ]]; then
 		if (whiptail --title "Hard-reset VM?" --yesno "Are you sure? This may cause data loss." $LINES $COLUMNS); then
