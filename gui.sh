@@ -151,7 +151,7 @@ function single_vm {
 		fi
 	elif [[ "$OPTION" == "vm-cd-add" ]]; then
 		AVAILABLE_CDS=$(xe cd-list | grep "name-label" | sed -e 's#.*: ##' | sed -e 's#\(.*\)#"\1" "\1" #' | tr -d '\n')
-		CD_NAME=$(eval "whiptail --title 'Menu example' --menu 'Choose an option' $LINES $COLUMNS $(( $LINES - 8 )) 'back' 'Return to the main menu.' $AVAILABLE_CDS")
+		CD_NAME=$(eval "whiptail --title 'Menu example' --menu 'Choose an option' $LINES $COLUMNS $(( $LINES - 8 )) 'back' 'Return to the main menu.' $AVAILABLE_CDS 3>&1 1>&2 2>&3")
 
 		exitstatus=$?
 		if [ $exitstatus = 0 ]; then
