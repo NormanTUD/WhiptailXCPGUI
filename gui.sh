@@ -53,11 +53,22 @@ function single_vm {
 
 	echo $VM_UUID
 
-	#"vm-start" "Start VM"
-	#"vm-suspend" "Suspend VM"
-	#"diagnostic-vm-status" "Query the hosts on which the VM can boot, check the sharing/locking status of all VBDs."
-	#"vm-reboot" "Reboots the VM"
-	#"vm-reset-powerstate" "Pull plug and restart VM"
+	"vm-start" "Start VM"
+	"vm-suspend" "Suspend VM"
+	"diagnostic-vm-status" "Query the hosts on which the VM can boot, check the sharing/locking status of all VBDs."
+	"vm-reboot" "Reboots the VM"
+	"vm-reset-powerstate" "Pull plug and restart VM"
+
+	OPTION=$(whiptail --title "Menu example" --menu "Choose an option" 25 78 16 \
+		"back" "Return to the main menu." \
+		"vm-start" "Start VM"
+		"vm-suspend" "Suspend VM"
+		"diagnostic-vm-status" "Query the hosts on which the VM can boot, check the sharing/locking status of all VBDs."
+		"vm-reboot" "Reboots the VM"
+		"vm-reset-powerstate" "Pull plug and restart VM"
+		3>&1 1>&2 2>&3)
+
+	echo $OPTION
 
 
 	main
