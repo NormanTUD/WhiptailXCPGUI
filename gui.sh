@@ -104,7 +104,21 @@ function single_vm {
 
 		exitstatus=$?
 		if [ $exitstatus = 0 ]; then
-			xe vm-snapshot vm="$VM_UUID" new-name-label="$SNAPSHOP_NAME"
+			set +e
+			RES=$(xe vm-snapshot vm="$VM_UUID" new-name-label="$SNAPSHOP_NAME")
+			EC=$?
+			set -e
+
+			FULL_STR=""
+
+			if [[ "$EC" == "0" ]]; then
+				FULL_STR="$RES";
+			else
+				FULL_STR="$RES\n\nExit-Code: $EC";
+			fi
+
+
+			whiptail --title "Example Dialog" --msgbox "$FULL_STR" $LINES $COLUMNS
 		fi
 	elif [[ "$OPTION" == "vm-reset-powerstate" ]]; then
 		if (whiptail --title "Hard-reset VM?" --yesno "Are you sure? This may cause data loss." $LINES $COLUMNS); then
