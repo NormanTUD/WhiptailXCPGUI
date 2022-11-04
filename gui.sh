@@ -73,6 +73,8 @@ function single_vm {
 
 	if [[ "$OPTION" == "back" ]]; then
 		echo "Going back...";
+		main
+		exit 0
 	else
 		RES=$(xe $OPTION uuid=$1 2>&1)
 		EC=$?
@@ -80,7 +82,7 @@ function single_vm {
 		whiptail --title "Example Dialog" --msgbox "$RES\n\nExit-Code: $EC" $LINES $COLUMNS
 	fi
 	
-	main
+	single_vm $VM_UUID
 }
 
 function main {
