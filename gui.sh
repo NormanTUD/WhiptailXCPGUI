@@ -93,7 +93,16 @@ function single_vm {
 			EC=$?
 			set -e
 
-			whiptail --title "Example Dialog" --msgbox "$RES\n\nExit-Code: $EC" $LINES $COLUMNS
+			FULL_STR=""
+
+			if [[ "$EC" == "0" ]]; then
+				FULL_STR="$RES";
+			else
+				FULL_STR="$RES\n\nExit-Code: $EC";
+			fi
+
+
+			whiptail --title "Example Dialog" --msgbox "$FULL_STR" $LINES $COLUMNS
 		else
 			echo "User selected No, exit status was $?."
 		fi
