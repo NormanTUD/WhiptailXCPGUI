@@ -44,6 +44,10 @@ if ! command -v whiptail >/dev/null 2>/dev/null; then
 	exit 1
 fi
 
+function get_status_for_vm {
+	xe vm-list | grep -A2 "$1" | tail -n1 | sed -e 's/.*: //'
+}
+
 function single_vm {
 	VM_UUID=$1
 
