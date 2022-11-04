@@ -65,6 +65,7 @@ function single_vm {
 		"vm-unpause" "Unpause VM" \
 		"vm-resume" "Resume VM" \
 		"vm-shutdown" "Shut down VM" \
+		'vm-vif-list' 'Lists the VIFs from the specified VMs' \
 		3>&1 1>&2 2>&3
 	)
 
@@ -92,7 +93,6 @@ function main {
 		'cd-list' 'List CDs and ISOs' \
 		'network-list' 'List networks' \
 		'sr-list' 'List SRs' \
-		'vm-vif-list' 'vm-vif-list' \
 		$VMS 'q' 'exit' 3>&1 1>&2 2>&3")
 
 	if [[ "$CHOSEN_OPTION" == "q" ]]; then
