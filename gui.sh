@@ -89,6 +89,8 @@ function main {
 		xe cd-list
 	elif [[ "$CHOSEN_OPTION" == "network-list" ]]; then
 		xe network-list
+	elif [[ "$CHOSEN_OPTION" == "sr-list" ]]; then
+		xe sr-list
 	else
 		single_vm "$CHOSEN_OPTION"
 	fi
