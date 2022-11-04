@@ -63,7 +63,7 @@ function run_command_whiptail {
 	fi
 
 
-	whiptail --title "$TITLE" --msgbox "$FULL_STR" $LINES $COLUMNS
+	whiptail --scrolltext --title "$TITLE" --msgbox "$FULL_STR" $LINES $COLUMNS
 }
 
 function get_status_for_vm {
