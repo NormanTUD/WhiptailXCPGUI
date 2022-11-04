@@ -175,6 +175,7 @@ function main {
 		exit 0
 	elif [[ "$CHOSEN_OPTION" == "cd-list" ]]; then
 		run_command_whiptail "cd-list" "xe cd-list"
+		main
 	elif [[ "$CHOSEN_OPTION" == "network-list" ]]; then
 		run_command_whiptail "network-list" "xe network-list"
 		main
