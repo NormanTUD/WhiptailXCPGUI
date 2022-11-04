@@ -83,6 +83,7 @@ function single_vm {
 	echo $VM_UUID
 
 	POSSIBLE_PARAMS=(
+		"general-info" "Show all available info for this VM" \
 		"diagnostic-vm-status" "Query the hosts on which the VM can boot, check the sharing/locking status of all VBDs." \
 		'vm-vif-list' 'Lists the VIFs from the specified VMs' \
 		"vm-cd-list" "List CDs" \
@@ -140,6 +141,8 @@ function single_vm {
 		echo "Going back...";
 		main
 		exit 0
+	elif [[ "$OPTION" == "general-info" ]]; then
+		run_command_whiptail "general-info" "xe vm-list params=all uuid=$VM_UUID"
 	elif [[ "$OPTION" == "q" ]]; then
 		exit 0
 	elif [[ "$OPTION" == "vm-snapshot" ]]; then
