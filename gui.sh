@@ -64,6 +64,7 @@ function single_vm {
 		"vm-pause" "Pause VM" \
 		"vm-unpause" "Unpause VM" \
 		"vm-resume" "Resume VM" \
+		"vm-shutdown" "Shut down VM" \
 		3>&1 1>&2 2>&3
 	)
 
