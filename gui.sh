@@ -66,6 +66,7 @@ function single_vm {
 		"vm-resume" "Resume VM" \
 		"vm-shutdown" "Shut down VM" \
 		'vm-vif-list' 'Lists the VIFs from the specified VMs' \
+		'q' 'exit' \
 		3>&1 1>&2 2>&3
 	)
 
@@ -76,6 +77,7 @@ function single_vm {
 		echo "Going back...";
 		main
 		exit 0
+	elif [[ "$OPTION" == "q" ]]; then
 	else
 		RES=$(xe $OPTION uuid=$1 2>&1)
 		EC=$?
