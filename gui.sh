@@ -74,6 +74,10 @@ function get_vm_name_by_uuid {
 	xe vm-list | grep -A1 "$1" | tail -n1  | sed -e 's/.*:\s*//'
 }
 
+function vm_has_xentools_installed {
+	xe vm-param-get param-name=has-vendor-device uuid=$1
+}
+
 function single_vm {
 	VM_UUID=$1
 
@@ -100,11 +104,13 @@ function single_vm {
 			)
 		fi
 	else
-		POSSIBLE_PARAMS+=(
-			"vm-reboot" "Reboots the VM"
-			"vm-shutdown" "Shut down VM"
-			"vm-reset-powerstate" "Pull plug and restart VM"
-		)
+		if [[ $(vm_has_xentools_installed $VM_UUID) == "true" ]]; then
+			POSSIBLE_PARAMS+=(
+				"vm-reboot" "Reboots the VM"
+				"vm-shutdown" "Shut down VM"
+				"vm-reset-powerstate" "Pull plug and restart VM"
+			)
+		fi
 	fi
 
 	if [[ "$VM_STATUS" == "suspended" ]]; then
