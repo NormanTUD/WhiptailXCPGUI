@@ -65,7 +65,7 @@ function single_vm {
 		"vm-cd-list" "List CDs" \
 	)
 
-	if [[ "$VM_STATUS" != "running" ]; then
+	if [[ "$VM_STATUS" != "running" ]]; then
 		POSSIBLE_PARAMS+=("vm-start" "Start VM")
 	fi
 	
