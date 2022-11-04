@@ -149,6 +149,16 @@ function single_vm {
 		if [ $exitstatus = 0 ]; then
 			run_command_whiptail "Snapshot" "xe vm-snapshot vm=$VM_UUID new-name-label=\"$SNAPSHOP_NAME\""
 		fi
+	elif [[ "$OPTION" == "vm-cd-add" ]]; then
+		AVAILABLE_CDS=$(xe cd-list | grep "name-label" | sed -e 's#.*: ##' | sed -e 's#\(.*\)#"\1" "\1" #' | tr -d '\n')
+		CD_NAME=$(eval "whiptail --title 'Menu example' --menu 'Choose an option' $LINES $COLUMNS $(( $LINES - 8 )) 'back' 'Return to the main menu.' $AVAILABLE_CDS")
+
+		exitstatus=$?
+		if [ $exitstatus = 0 ]; then
+			xe vm-cd-add cd-name="$CD_NAME" device=0 uuid=$VM_UUID
+		else
+			echo "User selected Cancel."
+		fi
 	elif [[ "$OPTION" == "vm-reset-powerstate" ]]; then
 		if (whiptail --title "Hard-reset VM?" --yesno "Are you sure? This may cause data loss." $LINES $COLUMNS); then
 			run_command_whiptail "$OPTION" "xe $OPTION uuid=$VM_UUID --force"
