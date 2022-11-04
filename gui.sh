@@ -86,6 +86,18 @@ function single_vm {
 		exit 0
 	elif [[ "$OPTION" == "q" ]]; then
 		exit 0
+	elif [[ "$OPTION" == "vm-reset-powerstate" ]]; then
+		if (whiptail --title "Hard-reset VM?" --yesno "Are you sure? This may cause data loss." $LINES $COLUMNS); then
+			set +e
+			RES=$(xe $OPTION uuid=$1 --force 2>&1)
+			EC=$?
+			set -e
+
+			whiptail --title "Example Dialog" --msgbox "$RES\n\nExit-Code: $EC" $LINES $COLUMNS
+		else
+			echo "User selected No, exit status was $?."
+		fi
+
 	else
 		set +e
 		RES=$(xe $OPTION uuid=$1 2>&1)
