@@ -53,7 +53,7 @@ function single_vm {
 
 	echo $VM_UUID
 
-	OPTION=$(whiptail --title "Menu example" --menu "Choose an option" 25 78 16 \
+	OPTION=$(whiptail --title "Menu example" --menu "Choose an option" $LINES $COLUMNS $(( $LINES - 8 )) \
 		"back" "Return to the main menu." \
 		"vm-cd-list" "List CDs" \
 		"vm-start" "Start VM" \
