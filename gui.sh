@@ -55,6 +55,7 @@ function single_vm {
 
 	OPTION=$(whiptail --title "Menu example" --menu "Choose an option" 25 78 16 \
 		"back" "Return to the main menu." \
+		"vm-cd-list" "List CDs" \
 		"vm-start" "Start VM" \
 		"vm-suspend" "Suspend VM" \
 		"diagnostic-vm-status" "Query the hosts on which the VM can boot, check the sharing/locking status of all VBDs." \
@@ -65,6 +66,12 @@ function single_vm {
 	echo $OPTION
 
 
+	if [[ "$CHOSEN_OPTION" == "back" ]]; then
+		echo "Going back...";
+	else
+		xe $OPTION uuid=$1
+	fi
+	
 	main
 }
 
