@@ -92,6 +92,7 @@ function single_vm {
 		"vm-reboot" "Reboots the VM" \
 		"snapshot-list" "Lists all snapshots for this VM" \
 		"vm-cd-eject" "Eject currently mounted CD"
+		"vm-cd-add" "Add CD"
 	)
 
 	if [[ "$VM_STATUS" != "running" ]]; then
