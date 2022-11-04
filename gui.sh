@@ -61,8 +61,11 @@ function single_vm {
 	echo $VM_UUID
 
 	POSSIBLE_PARAMS=(
+		"diagnostic-vm-status" "Query the hosts on which the VM can boot, check the sharing/locking status of all VBDs." \
 		'vm-vif-list' 'Lists the VIFs from the specified VMs' \
 		"vm-cd-list" "List CDs" \
+		"vm-shutdown" "Shut down VM" \
+		"vm-reset-powerstate" "Pull plug and restart VM" \
 	)
 
 	if [[ "$VM_STATUS" != "running" ]]; then
@@ -80,11 +83,8 @@ function single_vm {
 		"back" "Return to the main menu." \
 		"${POSSIBLE_PARAMS[@]}" \
 		"vm-suspend" "Suspend VM" \
-		"diagnostic-vm-status" "Query the hosts on which the VM can boot, check the sharing/locking status of all VBDs." \
 		"vm-reboot" "Reboots the VM" \
-		"vm-reset-powerstate" "Pull plug and restart VM" \
 		"vm-resume" "Resume VM" \
-		"vm-shutdown" "Shut down VM" \
 		'q' 'exit' \
 		3>&1 1>&2 2>&3
 	)
