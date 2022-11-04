@@ -78,6 +78,7 @@ function single_vm {
 		main
 		exit 0
 	elif [[ "$OPTION" == "q" ]]; then
+		exit 0
 	else
 		RES=$(xe $OPTION uuid=$1 2>&1)
 		EC=$?
