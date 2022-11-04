@@ -64,22 +64,28 @@ function single_vm {
 		"diagnostic-vm-status" "Query the hosts on which the VM can boot, check the sharing/locking status of all VBDs." \
 		'vm-vif-list' 'Lists the VIFs from the specified VMs' \
 		"vm-cd-list" "List CDs" \
-		"vm-shutdown" "Shut down VM" \
 		"vm-reset-powerstate" "Pull plug and restart VM" \
 		"vm-snapshot" "Create snapshop"
-		"vm-suspend" "Suspend VM" \
+		"vm-shutdown" "Shut down VM" \
 		"vm-reboot" "Reboots the VM" \
+		"vm-suspend" "Suspend VM" \
 		"vm-resume" "Resume VM" \
 	)
 
 	if [[ "$VM_STATUS" != "running" ]]; then
-		POSSIBLE_PARAMS+=("vm-start" "Start VM")
+		POSSIBLE_PARAMS+=(
+			"vm-start" "Start VM"
+		)
 	fi
 
 	if [[ "$VM_STATUS" == "paused" ]]; then
-		POSSIBLE_PARAMS+=("vm-unpause" "Unpause VM")
+		POSSIBLE_PARAMS+=(
+			"vm-unpause" "Unpause VM"
+		)
 	else
-		POSSIBLE_PARAMS+=("vm-pause" "Pause VM")
+		POSSIBLE_PARAMS+=(
+			"vm-pause" "Pause VM"
+		)
 	fi
 	
 
