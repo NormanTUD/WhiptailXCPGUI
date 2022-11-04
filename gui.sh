@@ -77,7 +77,7 @@ function single_vm {
 		RES=$(xe $OPTION uuid=$1 2>&1)
 		EC=$?
 
-		whiptail --title "Example Dialog" --msgbox "$RES\n\n$EC" $LINES $COLUMNS
+		whiptail --title "Example Dialog" --msgbox "$RES\n\nExit-Code: $EC" $LINES $COLUMNS
 	fi
 	
 	main
