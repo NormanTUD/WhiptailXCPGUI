@@ -119,9 +119,11 @@ function single_vm {
 		)
 	else
 		if [[ "$VM_STATUS" == "running" ]]; then
-			POSSIBLE_PARAMS+=(
-				"vm-suspend" "Suspend VM"
-			)
+			if [[ $(vm_has_xentools_installed $VM_UUID) == "true" ]]; then
+				POSSIBLE_PARAMS+=(
+					"vm-suspend" "Suspend VM"
+				)
+			fi
 		fi
 	fi
 
