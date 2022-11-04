@@ -49,7 +49,7 @@ function run_command_whiptail {
 	TITLE=$1
 	COMMAND=$2
 	set +e
-	RES=$($COMMAND 2>&1)
+	RES=$(eval $COMMAND 2>&1)
 	EC=$?
 	set -e
 
