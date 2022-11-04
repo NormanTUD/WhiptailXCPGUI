@@ -196,6 +196,8 @@ function main {
 	elif [[ "$CHOSEN_OPTION" == "sr-list" ]]; then
 		run_command_whiptail "sr-list" "xe sr-list"
 		main
+	elif [[ "$CHOSEN_OPTION" == "host-list" ]]; then
+		run_command_whiptail "host-list" "xe host-list"
 	else
 		single_vm "$CHOSEN_OPTION"
 	fi
