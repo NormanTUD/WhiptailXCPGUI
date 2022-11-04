@@ -73,9 +73,11 @@ function single_vm {
 	)
 
 	if [[ "$VM_STATUS" != "running" ]]; then
-		POSSIBLE_PARAMS+=(
-			"vm-start" "Start VM"
-		)
+		if [[ "$VM_STATUS" != "paused" ]]; then
+			POSSIBLE_PARAMS+=(
+				"vm-start" "Start VM"
+			)
+		fi
 	fi
 
 	if [[ "$VM_STATUS" == "paused" ]]; then
