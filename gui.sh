@@ -67,6 +67,9 @@ function single_vm {
 		"vm-shutdown" "Shut down VM" \
 		"vm-reset-powerstate" "Pull plug and restart VM" \
 		"vm-snapshot" "Create snapshop"
+		"vm-suspend" "Suspend VM" \
+		"vm-reboot" "Reboots the VM" \
+		"vm-resume" "Resume VM" \
 	)
 
 	if [[ "$VM_STATUS" != "running" ]]; then
@@ -80,12 +83,9 @@ function single_vm {
 	fi
 	
 
-	OPTION=$(whiptail --title "Menu example" --menu "$VM_NAME ($VM_STATUS)" $LINES $COLUMNS $(( $LINES - 8 )) \
+	OPTION=$(whiptail --title "$VM_NAME ($VM_STATUS)" --menu "$VM_NAME ($VM_STATUS)" $LINES $COLUMNS $(( $LINES - 8 )) \
 		"back" "Return to the main menu." \
 		"${POSSIBLE_PARAMS[@]}" \
-		"vm-suspend" "Suspend VM" \
-		"vm-reboot" "Reboots the VM" \
-		"vm-resume" "Resume VM" \
 		'q' 'exit' \
 		3>&1 1>&2 2>&3
 	)
