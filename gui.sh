@@ -68,9 +68,7 @@ function single_vm {
 		"vm-snapshot" "Create snapshop"
 		"vm-shutdown" "Shut down VM" \
 		"vm-reboot" "Reboots the VM" \
-		"vm-suspend" "Suspend VM" \
 		"snapshot-list" "Lists all snapshots for this VM" \
-		"vm-resume" "Resume VM" \
 	)
 
 	if [[ "$VM_STATUS" != "running" ]]; then
@@ -79,6 +77,16 @@ function single_vm {
 				"vm-start" "Start VM"
 			)
 		fi
+	fi
+
+	if [[ "$VM_STATUS" == "suspended" ]]; then
+		POSSIBLE_PARAMS+=(
+			"vm-resume" "Resume VM"
+		)
+	else
+		POSSIBLE_PARAMS+=(
+			"vm-suspend" "Suspend VM"
+		)
 	fi
 
 	if [[ "$VM_STATUS" == "paused" ]]; then
